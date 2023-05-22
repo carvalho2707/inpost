@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">InPost Recruitment Task</string>
 
+    <string name="shipment_order_number">nr przesylki</string>
+    <string name="shipment_status">status</string>
+    <string name="shipment_sender">sender</string>
+    <string name="shipment_more">more</string>
+
     <string name="status_adopted_at_sorting_center">Przyjęta w Sortowni</string>
     <string name="status_sent_from_sorting_center">Wysłana z Sortowni</string>
     <string name="status_adopted_at_source_branch">Przyjęta w Oddziale</string>

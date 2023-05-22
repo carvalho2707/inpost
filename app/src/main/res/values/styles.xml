@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Shipment" />
+
+    <style name="Shipment.Title">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="Shipment.Value">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="Shipment.Value.Bold" parent="@style/Shipment.Value">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="Shipment.Value.Bold.Small" parent="@style/Shipment.Value.Bold">
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>
