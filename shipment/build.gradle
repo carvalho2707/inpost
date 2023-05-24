@@ -1,22 +1,20 @@
 plugins {
     id 'kotlin-kapt'
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.dagger.hilt.android'
 }
 
 android {
-    namespace 'pl.inpost.recruitmenttask'
+    namespace 'pl.inpost.recruitmenttask.shipment'
     compileSdk 33
 
     defaultConfig {
-        applicationId "pl.inpost.recruitmenttask"
         minSdk 21
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -37,12 +35,8 @@ android {
     }
 }
 
-kapt {
-    correctErrorTypes true
-}
-
 dependencies {
-    implementation(project(':shipment'))
+
     implementation(project(':labels'))
 
     implementation('org.jetbrains.kotlin:kotlin-stdlib:1.8.21')
@@ -53,6 +47,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+
+    implementation 'androidx.fragment:fragment-ktx:1.5.7'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
 

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/shipment_item_padding_horizontal"
+    android:paddingTop="@dimen/shipment_item_padding_top"
+    android:paddingBottom="@dimen/shipment_item_padding_bottom">
+
+    <TextView
+        android:id="@+id/shipmentNumberLabel"
+        style="@style/Shipment.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/shipment_item_margin_horizontal"
+        android:text="@string/shipment_order_number"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toStartOf="@id/currierImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/shipmentNumber"
+        style="@style/Shipment.Value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/shipment_item_margin_horizontal"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/shipment_order_number"
+        android:textIsSelectable="true"
+        app:layout_constraintEnd_toStartOf="@id/currierImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shipmentNumberLabel"
+        tools:text="235678654323567889762231" />
+
+    <ImageView
+        android:id="@+id/currierImage"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
+        android:contentDescription="@string/shipment_currier_content_desc"
+        android:src="@drawable/ic_currier"
+        app:layout_constraintBottom_toBottomOf="@id/shipmentNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/shipmentNumber"
+        app:layout_constraintTop_toTopOf="@id/shipmentNumberLabel" />
+
+    <TextView
+        android:id="@+id/shipmentStatusLabel"
+        style="@style/Shipment.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/shipment_status"
+        android:textAllCaps="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shipmentNumber" />
+
+    <TextView
+        android:id="@+id/shipmentStatus"
+        style="@style/Shipment.Value.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shipmentStatusLabel"
+        tools:text="Wydana do doręczenia" />
+
+    <TextView
+        android:id="@+id/shipmentSenderLabel"
+        style="@style/Shipment.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/shipment_sender"
+        android:textAllCaps="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shipmentStatus" />
+
+    <TextView
+        android:id="@+id/shipmentSender"
+        style="@style/Shipment.Value.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/shipment_item_margin_horizontal"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textIsSelectable="true"
+        app:layout_constraintEnd_toStartOf="@id/shipmentMoreContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shipmentSenderLabel"
+        tools:text="adresmailowy@mail.pl" />
+
+    <LinearLayout
+        android:id="@+id/shipmentMoreContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/shipmentSender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/shipmentSender"
+        app:layout_constraintTop_toTopOf="@id/shipmentSender">
+
+        <TextView
+            android:id="@+id/shipmentMore"
+            style="@style/Shipment.Value.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:includeFontPadding="true"
+            android:paddingBottom="1dp"
+            android:text="@string/shipment_more" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:contentDescription="@string/shipment_more_content_desc"
+            android:src="@drawable/ic_arrow_right" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

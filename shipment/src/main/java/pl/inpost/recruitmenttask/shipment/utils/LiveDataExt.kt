@@ -1,3 +1,5 @@
+package pl.inpost.recruitmenttask.shipment.utils
+
 import androidx.lifecycle.MutableLiveData
 
 fun <T> MutableLiveData<T>.setState(newState: T.() -> T) {
