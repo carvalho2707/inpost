@@ -5,21 +5,20 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
+import org.threeten.bp.ZonedDateTime
 import pl.inpost.recruitmenttask.shipment.R
 import pl.inpost.recruitmenttask.shipment.data.ApiTypeAdapter
-import pl.inpost.recruitmenttask.shipment.data.model.CustomerNetwork
-import pl.inpost.recruitmenttask.shipment.data.model.EventLogNetwork
-import pl.inpost.recruitmenttask.shipment.data.model.OperationsNetwork
-import pl.inpost.recruitmenttask.shipment.data.model.ShipmentNetwork
-import pl.inpost.recruitmenttask.shipment.data.model.ShipmentStatus
-import pl.inpost.recruitmenttask.shipment.data.model.ShipmentType
-import pl.inpost.recruitmenttask.shipment.data.model.ShipmentsResponse
-import java.time.ZonedDateTime
+import pl.inpost.recruitmenttask.shipment.data.api.model.CustomerNetwork
+import pl.inpost.recruitmenttask.shipment.data.api.model.EventLogNetwork
+import pl.inpost.recruitmenttask.shipment.data.api.model.OperationsNetwork
+import pl.inpost.recruitmenttask.shipment.data.api.model.ShipmentNetwork
+import pl.inpost.recruitmenttask.shipment.data.api.model.ShipmentType
+import pl.inpost.recruitmenttask.shipment.data.api.model.ShipmentsResponse
 import kotlin.random.Random
 
 
 class MockShipmentApi(
-    @ApplicationContext private val context: Context,
+    private val context: Context,
     apiTypeAdapter: ApiTypeAdapter
 ) : ShipmentApi {
 
@@ -40,19 +39,14 @@ class MockShipmentApi(
 
     override suspend fun getShipments(): List<ShipmentNetwork> {
         delay(1000)
-        return if (firstUse) {
-            firstUse = false
-            emptyList()
-        } else {
-            response.shipments
-        }
+        return response.shipments
     }
 }
 
 private fun mockShipmentNetwork(
     number: String = Random.nextLong(1, 9999_9999_9999_9999).toString(),
     type: ShipmentType = ShipmentType.PARCEL_LOCKER,
-    status: ShipmentStatus = ShipmentStatus.DELIVERED,
+    status: String = "DELIVERED",
     sender: CustomerNetwork? = mockCustomerNetwork(),
     receiver: CustomerNetwork? = mockCustomerNetwork(),
     operations: OperationsNetwork = mockOperationsNetwork(),
@@ -64,7 +58,7 @@ private fun mockShipmentNetwork(
 ) = ShipmentNetwork(
     number = number,
     shipmentType = type.name,
-    status = status.name,
+    status = status,
     eventLog = eventLog,
     openCode = openCode,
     expiryDate = expireDate,

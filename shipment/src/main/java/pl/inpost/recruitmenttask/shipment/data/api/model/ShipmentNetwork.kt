@@ -1,6 +1,7 @@
-package pl.inpost.recruitmenttask.shipment.data.model
+package pl.inpost.recruitmenttask.shipment.data.api.model
 
-import java.time.ZonedDateTime
+import org.threeten.bp.ZonedDateTime
+
 
 data class ShipmentNetwork(
     val number: String,
