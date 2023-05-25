@@ -2,6 +2,14 @@ package pl.inpost.recruitmenttask
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 @HiltAndroidApp
-class InPostRecruitmentTaskApp : Application()
+class InPostRecruitmentTaskApp : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+
+        Timber.plant(Timber.DebugTree())
+    }
+}
