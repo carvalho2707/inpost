@@ -3,6 +3,7 @@ package pl.inpost.recruitmenttask.shipment.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +58,14 @@ class ShipmentAdapter(
                 shipmentNumber.text = shipment.number
                 shipmentStatus.setText(shipment.status)
                 shipmentSender.text = shipment.email
+
+                shipment.pickUp?.let {
+                    pickupLayout.title.text = ""
+                    pickupLayout.dayOfTheWeek.text = it.date
+                    pickupLayout.date.text = it.date
+                    pickupLayout.time.text = it.time
+                }
+                pickupLayout.root.isVisible = shipment.pickUp != null
 
                 shipmentMoreContainer.setSafeOnClickListener {
                     onClickMore(shipment)

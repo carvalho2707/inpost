@@ -30,12 +30,13 @@
         android:layout_marginEnd="@dimen/shipment_item_margin_horizontal"
         android:ellipsize="end"
         android:maxLines="1"
+        android:singleLine="true"
         android:text="@string/shipment_order_number"
         android:textIsSelectable="true"
         app:layout_constraintEnd_toStartOf="@id/currierImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/shipmentNumberLabel"
-        tools:text="235678654323567889762231" />
+        tools:text="2356786543235453567889762231" />
 
     <ImageView
         android:id="@+id/currierImage"
@@ -51,22 +52,38 @@
     <TextView
         android:id="@+id/shipmentStatusLabel"
         style="@style/Shipment.Title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/shipment_item_margin_vertical"
+        android:layout_marginEnd="@dimen/shipment_item_margin_horizontal"
         android:text="@string/shipment_status"
         android:textAllCaps="true"
+        app:layout_constraintEnd_toStartOf="@id/pickup_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/shipmentNumber" />
 
     <TextView
         android:id="@+id/shipmentStatus"
         style="@style/Shipment.Value.Bold"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/shipment_item_margin_horizontal"
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:layout_constraintEnd_toStartOf="@id/pickup_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/shipmentStatusLabel"
         tools:text="Wydana do doręczenia" />
+
+    <include
+        android:id="@+id/pickup_layout"
+        layout="@layout/layout_pickup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/shipmentStatusLabel"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/shipmentSenderLabel"
@@ -87,6 +104,7 @@
         android:layout_marginEnd="@dimen/shipment_item_margin_horizontal"
         android:ellipsize="end"
         android:maxLines="1"
+        android:singleLine="true"
         android:textIsSelectable="true"
         app:layout_constraintEnd_toStartOf="@id/shipmentMoreContainer"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="2dp">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/Shipment.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="CZEKA NA ODBIÓR DO" />
+
+    <TextView
+        android:id="@+id/day_of_the_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/divider_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="pn." />
+
+    <View
+        android:id="@+id/divider_start"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/shipment_pickup_margin"
+        android:layout_marginEnd="@dimen/shipment_pickup_margin"
+        android:background="@color/medium_gray"
+        app:layout_constraintBottom_toBottomOf="@id/date"
+        app:layout_constraintEnd_toStartOf="@id/date"
+        app:layout_constraintStart_toEndOf="@id/day_of_the_week"
+        app:layout_constraintTop_toTopOf="@id/date" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="14.06.18" />
+
+    <View
+        android:id="@+id/divider_end"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/shipment_pickup_margin"
+        android:layout_marginEnd="@dimen/shipment_pickup_margin"
+        android:background="@color/medium_gray"
+        app:layout_constraintBottom_toBottomOf="@id/date"
+        app:layout_constraintEnd_toStartOf="@id/time"
+        app:layout_constraintStart_toEndOf="@id/date"
+        app:layout_constraintTop_toTopOf="@id/date" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/divider_end"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="11:30" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

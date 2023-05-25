@@ -11,4 +11,6 @@
     <dimen name="shipment_header_padding_vertical">16dp</dimen>
     <dimen name="shipment_header_margin_horizontal">16dp</dimen>
 
+    <dimen name="shipment_pickup_margin">4dp</dimen>
+
 </resources>
