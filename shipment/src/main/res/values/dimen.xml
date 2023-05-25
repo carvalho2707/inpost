@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="shipment_item_spacing">16dp</dimen>
     <dimen name="shipment_item_padding_top">16dp</dimen>
     <dimen name="shipment_item_padding_bottom">8dp</dimen>
     <dimen name="shipment_item_padding_horizontal">20dp</dimen>
     <dimen name="shipment_item_margin_horizontal">16dp</dimen>
+    <dimen name="shipment_item_margin_vertical">16dp</dimen>
+
+    <dimen name="shipment_header_padding_horizontal">20dp</dimen>
+    <dimen name="shipment_header_padding_vertical">16dp</dimen>
+    <dimen name="shipment_header_margin_horizontal">16dp</dimen>
 
 </resources>
