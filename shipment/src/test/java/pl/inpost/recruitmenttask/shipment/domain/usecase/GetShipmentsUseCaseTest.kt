@@ -12,6 +12,7 @@ import pl.inpost.recruitmenttask.shipment.data.repository.ShipmentsRepository
 import pl.inpost.recruitmenttask.shipment.domain.generator.generateShipment
 import pl.inpost.recruitmenttask.shipment.domain.model.Header
 import pl.inpost.recruitmenttask.shipment.domain.model.ShipmentModel
+import java.lang.Exception
 import pl.inpost.recruitmenttask.labels.R as LabelsR
 
 internal class GetShipmentsUseCaseTest {
@@ -63,7 +64,7 @@ internal class GetShipmentsUseCaseTest {
 
             val result = underTest()
 
-            assertEquals(expected, result)
+            assertEquals(Result.success(expected), result)
 
             coVerify(exactly = 1) { shipmentsRepository.getShipments() }
         }
@@ -92,7 +93,7 @@ internal class GetShipmentsUseCaseTest {
 
             val result = underTest()
 
-            assertEquals(expected, result)
+            assertEquals(Result.success(expected), result)
 
             coVerify(exactly = 1) { shipmentsRepository.getShipments() }
         }
@@ -121,7 +122,7 @@ internal class GetShipmentsUseCaseTest {
 
             val result = underTest()
 
-            assertEquals(expected, result)
+            assertEquals(Result.success(expected), result)
 
             coVerify(exactly = 1) { shipmentsRepository.getShipments() }
         }
@@ -136,6 +137,22 @@ internal class GetShipmentsUseCaseTest {
             underTest = GetShipmentsUseCase(shipmentsRepository)
 
             val result = underTest()
+
+            assertEquals(Result.success(expected), result)
+
+            coVerify(exactly = 1) { shipmentsRepository.getShipments() }
+        }
+
+    @Test
+    fun `given error when invoke then should return error`() =
+        runBlocking {
+            val exception = Exception("error_message")
+            coEvery { shipmentsRepository.getShipments() } throws exception
+
+            underTest = GetShipmentsUseCase(shipmentsRepository)
+
+            val result = underTest()
+            val expected = Result.failure<ShipmentModel>(exception)
 
             assertEquals(expected, result)
 

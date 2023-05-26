@@ -17,7 +17,7 @@ import pl.inpost.recruitmenttask.shipment.domain.model.ShipmentModel
 
 class ShipmentAdapter(
     private val onClickMore: (Shipment) -> Unit,
-    private val onClickCurrier: (Shipment) -> Unit,
+    private val onClickCurrier: (Shipment) -> Unit
 ) : ListAdapter<ShipmentModel, RecyclerView.ViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -51,7 +51,7 @@ class ShipmentAdapter(
     class ShipmentViewHolder(
         view: View,
         private val onClickMore: (Shipment) -> Unit,
-        private val onClickCurrier: (Shipment) -> Unit,
+        private val onClickCurrier: (Shipment) -> Unit
     ) : RecyclerView.ViewHolder(view) {
         private val binding: ShipmentItemBinding = ShipmentItemBinding.bind(view)
 

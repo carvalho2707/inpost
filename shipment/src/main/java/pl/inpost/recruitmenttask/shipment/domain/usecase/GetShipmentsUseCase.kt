@@ -1,5 +1,6 @@
 package pl.inpost.recruitmenttask.shipment.domain.usecase
 
+import pl.inpost.recruitmenttask.core.utils.runSuspendCatching
 import pl.inpost.recruitmenttask.shipment.data.repository.ShipmentsRepository
 import pl.inpost.recruitmenttask.shipment.domain.mapper.sort
 import pl.inpost.recruitmenttask.shipment.domain.mapper.toShipment
@@ -12,7 +13,7 @@ class GetShipmentsUseCase @Inject constructor(
     private val shipmentsRepository: ShipmentsRepository
 ) {
 
-    suspend operator fun invoke(): List<ShipmentModel> {
+    suspend operator fun invoke(): Result<List<ShipmentModel>> = runSuspendCatching {
         val results = mutableListOf<ShipmentModel>()
 
         val groupedShipments = shipmentsRepository.getShipments()
@@ -30,6 +31,6 @@ class GetShipmentsUseCase @Inject constructor(
             results.addAll(groupedShipments.getValue(false))
         }
 
-        return results
+        results
     }
 }

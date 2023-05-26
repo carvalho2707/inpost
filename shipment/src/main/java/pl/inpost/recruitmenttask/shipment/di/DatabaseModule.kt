@@ -8,6 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pl.inpost.recruitmenttask.shipment.AppDatabase
 import pl.inpost.recruitmenttask.shipment.data.local.dao.ArchivedShipmentDao
+import pl.inpost.recruitmenttask.shipment.data.local.dao.ShipmentEntityDao
 import javax.inject.Singleton
 
 @Module
@@ -23,5 +24,10 @@ object DatabaseModule {
     @Provides
     fun provideArchivedShipmentDao(appDatabase: AppDatabase): ArchivedShipmentDao {
         return appDatabase.archivedShipmentDao()
+    }
+
+    @Provides
+    fun provideShipmentEntityDao(appDatabase: AppDatabase): ShipmentEntityDao {
+        return appDatabase.shipmentEntityDao()
     }
 }

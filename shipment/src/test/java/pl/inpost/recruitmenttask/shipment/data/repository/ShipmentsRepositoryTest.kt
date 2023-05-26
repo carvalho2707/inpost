@@ -10,12 +10,17 @@ import org.junit.Test
 import pl.inpost.recruitmenttask.shipment.data.api.ShipmentApi
 import pl.inpost.recruitmenttask.shipment.data.generator.generateShipmentNetwork
 import pl.inpost.recruitmenttask.shipment.data.local.dao.ArchivedShipmentDao
+import pl.inpost.recruitmenttask.shipment.data.local.dao.ShipmentEntityDao
 import pl.inpost.recruitmenttask.shipment.data.local.model.ArchivedShipment
 
 internal class ShipmentsRepositoryTest {
 
     private val shipmentApi = mockk<ShipmentApi>()
     private val archivedShipmentDao = mockk<ArchivedShipmentDao>()
+    private val shipmentEntityDao = mockk<ShipmentEntityDao> {
+        coJustRun { insertAll(any()) }
+    }
+
     lateinit var underTest: ShipmentsRepository
 
     @Test
@@ -28,13 +33,14 @@ internal class ShipmentsRepositoryTest {
             coEvery { archivedShipmentDao.getAll() } returns emptyList()
             coEvery { shipmentApi.getShipments() } returns shipments
 
-            underTest = ShipmentsRepository(shipmentApi, archivedShipmentDao)
+            underTest = ShipmentsRepository(shipmentApi, archivedShipmentDao, shipmentEntityDao)
 
             val result = underTest.getShipments()
 
             assertEquals(shipments, result)
 
             coVerify(exactly = 1) { archivedShipmentDao.getAll() }
+            coVerify(exactly = 1) { shipmentEntityDao.insertAll(any()) }
             coVerify(exactly = 1) { shipmentApi.getShipments() }
         }
 
@@ -58,7 +64,7 @@ internal class ShipmentsRepositoryTest {
             coEvery { archivedShipmentDao.getAll() } returns archivedShipments
             coEvery { shipmentApi.getShipments() } returns shipments
 
-            underTest = ShipmentsRepository(shipmentApi, archivedShipmentDao)
+            underTest = ShipmentsRepository(shipmentApi, archivedShipmentDao, shipmentEntityDao)
 
             val result = underTest.getShipments()
 
@@ -66,6 +72,7 @@ internal class ShipmentsRepositoryTest {
 
             coVerify(exactly = 1) { archivedShipmentDao.getAll() }
             coVerify(exactly = 1) { shipmentApi.getShipments() }
+            coVerify(exactly = 1) { shipmentEntityDao.insertAll(any()) }
         }
 
     @Test
@@ -76,31 +83,12 @@ internal class ShipmentsRepositoryTest {
 
             coJustRun { archivedShipmentDao.insert(any()) }
 
-            underTest = ShipmentsRepository(shipmentApi, archivedShipmentDao)
+            underTest = ShipmentsRepository(shipmentApi, archivedShipmentDao, shipmentEntityDao)
 
             underTest.archiveShipment(input)
 
             coVerify(exactly = 0) { archivedShipmentDao.getAll() }
             coVerify(exactly = 0) { shipmentApi.getShipments() }
             coVerify(exactly = 1) { archivedShipmentDao.insert(archivedShipment) }
-            coVerify(exactly = 0) { archivedShipmentDao.delete(any()) }
-        }
-
-    @Test
-    fun `when unarchiveShipment then should unarchive shipment`() =
-        runBlocking {
-            val input = "1000"
-            val archivedShipment = ArchivedShipment(input)
-
-            coJustRun { archivedShipmentDao.delete(any()) }
-
-            underTest = ShipmentsRepository(shipmentApi, archivedShipmentDao)
-
-            underTest.unarchiveShipment(input)
-
-            coVerify(exactly = 0) { archivedShipmentDao.getAll() }
-            coVerify(exactly = 0) { shipmentApi.getShipments() }
-            coVerify(exactly = 0) { archivedShipmentDao.insert(any()) }
-            coVerify(exactly = 1) { archivedShipmentDao.delete(archivedShipment) }
         }
 }

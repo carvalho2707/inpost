@@ -15,7 +15,7 @@ class HomeActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, ShipmentListFragment.newInstance())
-                .commitNow()
+                .commit()
         }
     }
 }

@@ -3,6 +3,7 @@ package pl.inpost.recruitmenttask.shipment.domain.mapper
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import pl.inpost.recruitmenttask.shipment.data.api.model.ShipmentNetwork
+import pl.inpost.recruitmenttask.shipment.data.local.model.ShipmentEntity
 import pl.inpost.recruitmenttask.shipment.domain.model.PickUp
 import pl.inpost.recruitmenttask.shipment.domain.model.Shipment
 import pl.inpost.recruitmenttask.shipment.domain.model.ShipmentStatus
@@ -38,4 +39,11 @@ fun List<ShipmentNetwork>.sort() = sortedWith(
         .thenByDescending { it.expiryDate }
         .thenByDescending { it.storedDate }
         .thenByDescending { it.number }
+)
+
+fun ShipmentEntity.toShipment() = Shipment(
+    number = number,
+    status = ShipmentStatus.fromValue(status).nameRes,
+    email = receiverEmail.orEmpty(),
+    pickUp = pickUpDate?.toPickUp()
 )

@@ -35,12 +35,22 @@ class ShipmentListViewModel @Inject constructor(
                     isLoading = true
                 )
             }
-            val shipments = getShipmentsUseCase()
-            _uiState.update {
-                it.copy(
-                    shipments = shipments,
-                    isLoading = false
-                )
+            val result = getShipmentsUseCase()
+            if (result.isSuccess) {
+                _uiState.update {
+                    it.copy(
+                        shipments = result.getOrThrow(),
+                        isLoading = false,
+                        isError = false
+                    )
+                }
+            } else {
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        isError = true
+                    )
+                }
             }
         }
     }

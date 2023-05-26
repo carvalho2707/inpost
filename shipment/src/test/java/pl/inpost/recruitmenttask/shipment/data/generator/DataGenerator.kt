@@ -33,7 +33,7 @@ fun generateShipmentNetwork(
     operations = operations
 )
 
-private fun generateCustomerNetwork(
+fun generateCustomerNetwork(
     email: String = "adresmailowy@mail.pl",
     phoneNumber: String = "123 123 123",
     name: String = "Jan Kowalski"

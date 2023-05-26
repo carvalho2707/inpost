@@ -2,12 +2,14 @@ package pl.inpost.recruitmenttask.shipment.presentation
 
 import app.cash.turbine.test
 import io.mockk.coEvery
+import io.mockk.coJustRun
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
+import pl.inpost.recruitmenttask.shipment.data.repository.ShipmentsRepository
 import pl.inpost.recruitmenttask.shipment.domain.generator.generateHeader
 import pl.inpost.recruitmenttask.shipment.domain.generator.generateShipment
 import pl.inpost.recruitmenttask.shipment.domain.model.ShipmentModel
@@ -21,6 +23,7 @@ internal class ShipmentListViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     private val getShipmentsUseCase = mockk<GetShipmentsUseCase>()
+    private val shipmentsRepository = mockk<ShipmentsRepository>()
     lateinit var underTest: ShipmentListViewModel
 
     @Test
@@ -31,12 +34,16 @@ internal class ShipmentListViewModelTest {
                 generateShipment()
             )
 
-            coEvery { getShipmentsUseCase() } returns shipments
+            coEvery { getShipmentsUseCase() } returns Result.success(shipments)
 
-            underTest = ShipmentListViewModel(getShipmentsUseCase)
+            underTest = ShipmentListViewModel(getShipmentsUseCase, shipmentsRepository)
 
             underTest.uiState.test {
-                val expected = UiState(shipments = shipments)
+                val expected = UiState(
+                    shipments = shipments,
+                    isLoading = false,
+                    isError = false
+                )
                 assertEquals(expected, awaitItem())
 
                 coVerify(exactly = 1) { getShipmentsUseCase() }
@@ -51,14 +58,14 @@ internal class ShipmentListViewModelTest {
                 generateShipment()
             )
 
-            coEvery { getShipmentsUseCase() } returns emptyList()
+            coEvery { getShipmentsUseCase() } returns Result.success(emptyList())
 
-            underTest = ShipmentListViewModel(getShipmentsUseCase)
+            underTest = ShipmentListViewModel(getShipmentsUseCase, shipmentsRepository)
 
             underTest.uiState.test {
                 assertEquals(UiState(shipments = emptyList()), awaitItem())
 
-                coEvery { getShipmentsUseCase() } returns shipments
+                coEvery { getShipmentsUseCase() } returns Result.success(shipments)
 
                 underTest.refreshData()
 
@@ -66,5 +73,50 @@ internal class ShipmentListViewModelTest {
 
                 coVerify(exactly = 2) { getShipmentsUseCase() }
             }
+        }
+
+    @Test
+    fun `given error when refreshData then should set isError`() =
+        runBlocking {
+            val exception = Exception("error_message")
+
+            coEvery { getShipmentsUseCase() } returns Result.failure(exception)
+
+            underTest = ShipmentListViewModel(getShipmentsUseCase, shipmentsRepository)
+
+            underTest.uiState.test {
+                underTest.refreshData()
+
+                val expected = UiState(
+                    shipments = emptyList(),
+                    isLoading = false,
+                    isError = true
+                )
+
+                assertEquals(expected, awaitItem())
+
+                coVerify(exactly = 2) { getShipmentsUseCase() }
+            }
+        }
+
+    @Test
+    fun `when archiveShipment then should complete`() =
+        runBlocking {
+            val input = generateShipment()
+
+            val shipments: List<ShipmentModel> = listOf(
+                generateHeader(),
+                generateShipment()
+            )
+
+            coEvery { getShipmentsUseCase() } returns Result.success(shipments)
+            coJustRun { shipmentsRepository.archiveShipment(any()) }
+
+            underTest = ShipmentListViewModel(getShipmentsUseCase, shipmentsRepository)
+
+            underTest.archiveShipment(input)
+
+            coVerify(exactly = 2) { getShipmentsUseCase() }
+            coVerify(exactly = 1) { shipmentsRepository.archiveShipment(any()) }
         }
 }
