@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import pl.inpost.recruitmenttask.shipment.R
 import pl.inpost.recruitmenttask.shipment.databinding.FragmentShipmentListBinding
-import pl.inpost.recruitmenttask.shipment.databinding.ShipmentItemBinding
 import pl.inpost.recruitmenttask.shipment.presentation.ShipmentListViewModel
 import pl.inpost.recruitmenttask.shipment.utils.SpacingItemDecoration
 
@@ -47,7 +50,7 @@ class ShipmentListFragment : Fragment() {
 
         val shipmentAdapter = ShipmentAdapter(
             onClickMore = {
-                //TODO implement navigation to details
+                // TODO implement navigation to details
             }
         )
 
@@ -66,8 +69,12 @@ class ShipmentListFragment : Fragment() {
             binding.swipeRefresh.isRefreshing = false
         }
 
-        viewModel.viewState.observe(requireActivity()) { shipments ->
-            shipmentAdapter.submitList(shipments)
+        viewLifecycleOwner.lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect {
+                    shipmentAdapter.submitList(it.shipments)
+                }
+            }
         }
     }
 

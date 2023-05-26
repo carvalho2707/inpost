@@ -1,20 +1,16 @@
 package pl.inpost.recruitmenttask.shipment.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.util.copy
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainCoroutineDispatcher
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.inpost.recruitmenttask.shipment.data.api.ShipmentApi
-import pl.inpost.recruitmenttask.shipment.data.api.model.ShipmentNetwork
-import pl.inpost.recruitmenttask.shipment.domain.model.Shipment
+import pl.inpost.recruitmenttask.shipment.domain.model.UiState
 import pl.inpost.recruitmenttask.shipment.domain.usecase.GetShipmentsUseCase
-import pl.inpost.recruitmenttask.shipment.utils.setState
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,18 +18,21 @@ class ShipmentListViewModel @Inject constructor(
     private val getShipmentsUseCase: GetShipmentsUseCase
 ) : ViewModel() {
 
-    private val mutableViewState = MutableLiveData<List<Shipment>>(emptyList())
-    val viewState: LiveData<List<Shipment>> = mutableViewState
+    private val _uiState = MutableStateFlow(UiState())
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     init {
         refreshData()
     }
 
     fun refreshData() {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             val shipments = getShipmentsUseCase()
-            mutableViewState.setState { shipments }
-            Timber.d(shipments.toString())
+            _uiState.update {
+                it.copy(
+                    shipments = shipments
+                )
+            }
         }
     }
 }
