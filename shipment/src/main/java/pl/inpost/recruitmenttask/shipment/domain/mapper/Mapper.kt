@@ -16,7 +16,7 @@ fun ShipmentNetwork.toShipment() = Shipment(
 
 fun ZonedDateTime.toPickUp(): PickUp {
     val dayOfTheWeek = this.format(DateTimeFormatter.ofPattern("EEE."))
-    val date = this.format(DateTimeFormatter.ofPattern("dd.mm.yy"))
+    val date = this.format(DateTimeFormatter.ofPattern("dd.MM.yy"))
     val time = this.format(DateTimeFormatter.ofPattern("hh:mm"))
 
     return PickUp(
@@ -25,3 +25,17 @@ fun ZonedDateTime.toPickUp(): PickUp {
         time = time
     )
 }
+
+/*
+    My understanding of the sorting requirement was that we should older first by status and then
+    by each of the following dates.
+    I also thought it could meant that we should order by whatever date was closer to the current
+    time but I went with the first approach since I wasn't sure which one it should be.
+ */
+fun List<ShipmentNetwork>.sort() = sortedWith(
+    compareBy<ShipmentNetwork> { ShipmentStatus.fromValue(it.status).priority }
+        .thenByDescending { it.pickUpDate }
+        .thenByDescending { it.expiryDate }
+        .thenByDescending { it.storedDate }
+        .thenByDescending { it.number }
+)

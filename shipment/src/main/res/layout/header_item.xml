@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/gray_soft"
-    android:paddingHorizontal="@dimen/shipment_header_padding_horizontal"
-    android:paddingVertical="@dimen/shipment_header_padding_vertical">
+    android:paddingHorizontal="@dimen/shipment_header_padding_horizontal">
 
     <View
         android:layout_width="0dp"

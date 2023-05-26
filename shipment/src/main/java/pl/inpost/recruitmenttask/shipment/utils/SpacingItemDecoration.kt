@@ -12,6 +12,10 @@ class SpacingItemDecoration(private val spaceSize: Int) : RecyclerView.ItemDecor
         state: RecyclerView.State
     ) {
         with(outRect) {
+            if (parent.getChildAdapterPosition(view) == 0) {
+                top = spaceSize
+            }
+
             bottom = spaceSize
         }
     }

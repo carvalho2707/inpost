@@ -10,6 +10,8 @@
     <string name="shipment_more_content_desc">click for more details</string>
     <string name="shipment_pickup_title">czeka na odbiór do</string>
 
+    <string name="shipment_header_others">Pozostałe</string>
+
     <string name="status_adopted_at_sorting_center">Przyjęta w Sortowni</string>
     <string name="status_sent_from_sorting_center">Wysłana z Sortowni</string>
     <string name="status_adopted_at_source_branch">Przyjęta w Oddziale</string>

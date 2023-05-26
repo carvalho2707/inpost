@@ -6,10 +6,9 @@ import pl.inpost.recruitmenttask.shipment.data.api.model.EventLogNetwork
 import pl.inpost.recruitmenttask.shipment.data.api.model.OperationsNetwork
 import pl.inpost.recruitmenttask.shipment.data.api.model.ShipmentNetwork
 import pl.inpost.recruitmenttask.shipment.data.api.model.ShipmentType
-import kotlin.random.Random
 
 fun generateShipmentNetwork(
-    number: String = Random.nextLong(1, 9999_9999_9999_9999).toString(),
+    number: String = "1",
     type: ShipmentType = ShipmentType.PARCEL_LOCKER,
     status: String = "DELIVERED",
     sender: CustomerNetwork? = generateCustomerNetwork(),
@@ -35,7 +34,7 @@ fun generateShipmentNetwork(
 )
 
 private fun generateCustomerNetwork(
-    email: String = "name@email.com",
+    email: String = "adresmailowy@mail.pl",
     phoneNumber: String = "123 123 123",
     name: String = "Jan Kowalski"
 ) = CustomerNetwork(
