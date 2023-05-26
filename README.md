@@ -60,4 +60,8 @@ If for some reason Figma link stops working, here you can see the requested desi
 * The layout with date information ( that I called pickup layout) can have different information
   maybe depending on the status but since there wasn't any specific information in this readme I
   followed the rule that is shown only if pickUpDate is not null
-* The shipment archiving feature can be triggered by clicking on the currier icon
+* The shipment archiving feature can be triggered by clicking on the currier icon.
+* Storing shipments locally was implemented but the UI date is coming from the API. I could have
+  made it offline first and always return from the database using a flow but I wasn't sure if that
+  was the expected behaviour. However we could have used flow and a networkboundresource(from
+  google) or just listening to the database with a flow and fetching the data on a different thread.
