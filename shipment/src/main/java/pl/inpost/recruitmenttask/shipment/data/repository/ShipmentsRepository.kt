@@ -8,19 +8,20 @@ import javax.inject.Inject
 
 class ShipmentsRepository @Inject constructor(
     private val shipmentApi: ShipmentApi,
-    private val shipmentDao: ArchivedShipmentDao
+    private val archivedShipmentDao: ArchivedShipmentDao
 ) {
 
     suspend fun getShipments(): List<ShipmentNetwork> {
+        val archivedShipments = archivedShipmentDao.getAll().map { it.orderNumber }
         return shipmentApi.getShipments()
+            .filter { !archivedShipments.contains(it.number) }
     }
 
     suspend fun archiveShipment(orderNumber: String) {
-        shipmentDao.insert(ArchivedShipment(orderNumber))
+        archivedShipmentDao.insert(ArchivedShipment(orderNumber))
     }
 
     suspend fun unarchiveShipment(orderNumber: String) {
-        shipmentDao.delete(ArchivedShipment(orderNumber))
+        archivedShipmentDao.delete(ArchivedShipment(orderNumber))
     }
-
 }

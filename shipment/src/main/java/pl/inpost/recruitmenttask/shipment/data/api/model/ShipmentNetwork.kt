@@ -2,7 +2,6 @@ package pl.inpost.recruitmenttask.shipment.data.api.model
 
 import org.threeten.bp.ZonedDateTime
 
-
 data class ShipmentNetwork(
     val number: String,
     val shipmentType: String,

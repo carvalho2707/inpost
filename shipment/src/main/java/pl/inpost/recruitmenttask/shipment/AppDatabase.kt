@@ -12,22 +12,22 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun archivedShipmentDao(): ArchivedShipmentDao
 
-
     companion object {
         private var instance: AppDatabase? = null
 
         @Synchronized
         fun getInstance(ctx: Context): AppDatabase {
-            if (instance == null)
+            if (instance == null) {
                 instance = Room.databaseBuilder(
-                    ctx.applicationContext, AppDatabase::class.java, "app_database"
+                    ctx.applicationContext,
+                    AppDatabase::class.java,
+                    "app_database"
                 )
                     .fallbackToDestructiveMigration()
                     .build()
+            }
 
             return instance!!
-
         }
     }
-
 }

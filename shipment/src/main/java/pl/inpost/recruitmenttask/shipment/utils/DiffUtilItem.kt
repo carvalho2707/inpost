@@ -11,5 +11,4 @@ abstract class DiffUtilItem {
     }
 
     abstract fun itemID(): Any
-
 }

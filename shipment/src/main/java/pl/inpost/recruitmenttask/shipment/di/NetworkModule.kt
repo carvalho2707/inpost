@@ -19,5 +19,4 @@ object NetworkModule {
     @Provides
     fun provideShipmentApi(@ApplicationContext context: Context): ShipmentApi =
         MockShipmentApi(context, ApiTypeAdapter())
-
 }

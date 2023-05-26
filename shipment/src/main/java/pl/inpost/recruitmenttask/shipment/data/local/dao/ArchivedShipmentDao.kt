@@ -17,5 +17,4 @@ interface ArchivedShipmentDao {
 
     @Delete
     suspend fun delete(archivedShipment: ArchivedShipment)
-
 }

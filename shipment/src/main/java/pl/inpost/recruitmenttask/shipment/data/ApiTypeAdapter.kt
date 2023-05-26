@@ -3,9 +3,9 @@ package pl.inpost.recruitmenttask.shipment.data
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
 import dagger.Reusable
-import javax.inject.Inject
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
+import javax.inject.Inject
 
 @Reusable
 class ApiTypeAdapter @Inject constructor() {

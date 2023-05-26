@@ -6,5 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "archived_shipment")
 data class ArchivedShipment(
-    @PrimaryKey @ColumnInfo(name = "order_number") val orderNumber: String
+    @PrimaryKey @ColumnInfo(name = "order_number")
+    val orderNumber: String
 )

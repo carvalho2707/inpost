@@ -1,16 +1,12 @@
 package pl.inpost.recruitmenttask.shipment.di
 
 import android.content.Context
-import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pl.inpost.recruitmenttask.shipment.AppDatabase
-import pl.inpost.recruitmenttask.shipment.data.ApiTypeAdapter
-import pl.inpost.recruitmenttask.shipment.data.api.MockShipmentApi
-import pl.inpost.recruitmenttask.shipment.data.api.ShipmentApi
 import pl.inpost.recruitmenttask.shipment.data.local.dao.ArchivedShipmentDao
 import javax.inject.Singleton
 
@@ -28,5 +24,4 @@ object DatabaseModule {
     fun provideArchivedShipmentDao(appDatabase: AppDatabase): ArchivedShipmentDao {
         return appDatabase.archivedShipmentDao()
     }
-
 }

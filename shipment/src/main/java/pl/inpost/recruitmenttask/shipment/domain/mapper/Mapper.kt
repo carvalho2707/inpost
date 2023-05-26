@@ -15,7 +15,7 @@ fun ShipmentNetwork.toShipment() = Shipment(
 )
 
 fun ZonedDateTime.toPickUp(): PickUp {
-    val dayOfTheWeek = this.format(DateTimeFormatter.ofPattern("EEE"))
+    val dayOfTheWeek = this.format(DateTimeFormatter.ofPattern("EEE."))
     val date = this.format(DateTimeFormatter.ofPattern("dd.mm.yy"))
     val time = this.format(DateTimeFormatter.ofPattern("hh:mm"))
 
