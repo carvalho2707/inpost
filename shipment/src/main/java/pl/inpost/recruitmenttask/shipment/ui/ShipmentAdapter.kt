@@ -16,7 +16,8 @@ import pl.inpost.recruitmenttask.shipment.domain.model.Shipment
 import pl.inpost.recruitmenttask.shipment.domain.model.ShipmentModel
 
 class ShipmentAdapter(
-    private val onClickMore: (Shipment) -> Unit
+    private val onClickMore: (Shipment) -> Unit,
+    private val onClickCurrier: (Shipment) -> Unit,
 ) : ListAdapter<ShipmentModel, RecyclerView.ViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -24,7 +25,7 @@ class ShipmentAdapter(
         val view = inflater.inflate(viewType, parent, false)
 
         return when (viewType) {
-            R.layout.shipment_item -> ShipmentViewHolder(view, onClickMore)
+            R.layout.shipment_item -> ShipmentViewHolder(view, onClickMore, onClickCurrier)
             R.layout.header_item -> HeaderViewHolder(view)
             else -> throw Throwable("ShipmentAdapter got unexpected viewType")
         }
@@ -49,7 +50,8 @@ class ShipmentAdapter(
 
     class ShipmentViewHolder(
         view: View,
-        private val onClickMore: (Shipment) -> Unit
+        private val onClickMore: (Shipment) -> Unit,
+        private val onClickCurrier: (Shipment) -> Unit,
     ) : RecyclerView.ViewHolder(view) {
         private val binding: ShipmentItemBinding = ShipmentItemBinding.bind(view)
 
@@ -60,7 +62,6 @@ class ShipmentAdapter(
                 shipmentSender.text = shipment.email
 
                 shipment.pickUp?.let {
-                    pickupLayout.title.text = ""
                     pickupLayout.dayOfTheWeek.text = it.dayOfTheWeek
                     pickupLayout.date.text = it.date
                     pickupLayout.time.text = it.time
@@ -69,6 +70,10 @@ class ShipmentAdapter(
 
                 shipmentMoreContainer.setSafeOnClickListener {
                     onClickMore(shipment)
+                }
+
+                currierImage.setSafeOnClickListener {
+                    onClickCurrier(shipment)
                 }
             }
         }

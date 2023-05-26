@@ -29,7 +29,7 @@ class MockShipmentApi(
     }
 
     override suspend fun getShipments(): List<ShipmentNetwork> {
-        delay(5000)
+        delay(1000)
         return response.shipments
     }
 }

@@ -51,7 +51,8 @@ class ShipmentListFragment : Fragment() {
         val shipmentAdapter = ShipmentAdapter(
             onClickMore = {
                 // TODO implement navigation to details
-            }
+            },
+            onClickCurrier = viewModel::archiveShipment
         )
 
         binding.shipmentsRecyclerview.apply {
@@ -66,13 +67,14 @@ class ShipmentListFragment : Fragment() {
 
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.refreshData()
-            binding.swipeRefresh.isRefreshing = false
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
                     shipmentAdapter.submitList(it.shipments)
+
+                    binding.swipeRefresh.isRefreshing = it.isLoading
                 }
             }
         }
