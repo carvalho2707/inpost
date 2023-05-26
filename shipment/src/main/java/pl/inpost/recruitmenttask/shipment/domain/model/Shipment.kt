@@ -1,7 +1,7 @@
 package pl.inpost.recruitmenttask.shipment.domain.model
 
 import androidx.annotation.StringRes
-import pl.inpost.recruitmenttask.shipment.utils.DiffUtilItem
+import pl.inpost.recruitmenttask.core.utils.DiffUtilItem
 
 open class ShipmentModel(private val uuid: String) : DiffUtilItem() {
     override fun itemID() = uuid

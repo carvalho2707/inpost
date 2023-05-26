@@ -14,10 +14,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import pl.inpost.recruitmenttask.core.utils.SpacingItemDecoration
 import pl.inpost.recruitmenttask.shipment.R
 import pl.inpost.recruitmenttask.shipment.databinding.FragmentShipmentListBinding
 import pl.inpost.recruitmenttask.shipment.presentation.ShipmentListViewModel
-import pl.inpost.recruitmenttask.shipment.utils.SpacingItemDecoration
 
 @AndroidEntryPoint
 class ShipmentListFragment : Fragment() {

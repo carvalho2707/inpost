@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.shipment.utils
+package pl.inpost.recruitmenttask.core.utils
 
 abstract class DiffUtilItem {
 

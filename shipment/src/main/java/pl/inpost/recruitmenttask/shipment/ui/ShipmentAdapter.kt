@@ -7,13 +7,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import pl.inpost.recruitmenttask.core.utils.setSafeOnClickListener
 import pl.inpost.recruitmenttask.shipment.R
 import pl.inpost.recruitmenttask.shipment.databinding.HeaderItemBinding
 import pl.inpost.recruitmenttask.shipment.databinding.ShipmentItemBinding
 import pl.inpost.recruitmenttask.shipment.domain.model.Header
 import pl.inpost.recruitmenttask.shipment.domain.model.Shipment
 import pl.inpost.recruitmenttask.shipment.domain.model.ShipmentModel
-import pl.inpost.recruitmenttask.shipment.utils.setSafeOnClickListener
 
 class ShipmentAdapter(
     private val onClickMore: (Shipment) -> Unit
