@@ -43,7 +43,7 @@ private fun generateCustomerNetwork(
     name = name
 )
 
-private fun generateOperationsNetwork(
+fun generateOperationsNetwork(
     manualArchive: Boolean = false,
     delete: Boolean = false,
     collect: Boolean = false,
