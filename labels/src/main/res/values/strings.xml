@@ -8,6 +8,7 @@
     <string name="shipment_sender">sender</string>
     <string name="shipment_more">more</string>
     <string name="shipment_more_content_desc">click for more details</string>
+    <string name="shipment_pickup_title">czeka na odbiór do</string>
 
     <string name="status_adopted_at_sorting_center">Przyjęta w Sortowni</string>
     <string name="status_sent_from_sorting_center">Wysłana z Sortowni</string>

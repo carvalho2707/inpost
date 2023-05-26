@@ -61,7 +61,7 @@ class ShipmentAdapter(
 
                 shipment.pickUp?.let {
                     pickupLayout.title.text = ""
-                    pickupLayout.dayOfTheWeek.text = it.date
+                    pickupLayout.dayOfTheWeek.text = it.dayOfTheWeek
                     pickupLayout.date.text = it.date
                     pickupLayout.time.text = it.time
                 }
@@ -97,5 +97,4 @@ class ShipmentAdapter(
             ) = oldItem.hasSameContents(newItem)
         }
     }
-
 }

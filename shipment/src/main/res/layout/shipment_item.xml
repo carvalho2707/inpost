@@ -7,8 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/shipment_item_padding_horizontal"
-    android:paddingTop="@dimen/shipment_item_padding_top"
-    android:paddingBottom="@dimen/shipment_item_padding_bottom">
+    android:paddingVertical="@dimen/shipment_item_padding_vertical">
 
     <TextView
         android:id="@+id/shipmentNumberLabel"
